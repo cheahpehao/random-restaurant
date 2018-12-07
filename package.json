@@ -1,0 +1,16 @@
+{
+  "name": "random-restaurant",
+  "version": "0.0.1",
+  "description": "NodeJs Test",
+  "scripts": {
+    "start": "index.js"
+  },
+  "author": "Cheah Pe Hao",
+  "license": "ISC",
+  "dependencies": {
+    "bootstrap": "^4.1.3",
+    "express": "latest",
+    "jquery": "^1.9.1",
+    "popper.js": "^1.14.6"
+  }
+}
