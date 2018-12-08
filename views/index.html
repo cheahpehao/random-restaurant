@@ -9,6 +9,7 @@
       <nav class="nav">
       <a class="nav-link" href="/">Show restaurant</a>  
       <a class="nav-link" href="/add">Add restaurant</a>
+      <a class="nav-link" href="/random">Random a restaurnt</a>
       </nav>
   </div>
 <div>
@@ -31,15 +32,6 @@
           
       </tbody>
     </table>
-</div>
-
-<div>
-  <p>Today Let's Eat at: </p>
-  <p id="result"></p>
-  <br>
-</div>
-<div>
-    <button type="button" class="btn btn-primary" onclick=randomRestaurant()>Random a restaurant</button>
 </div>
 
   <!-- Bootstrap Javascript -->
@@ -73,20 +65,6 @@ $(document).ready(function(){
     });
   });
 })
-function randomRestaurant(){
-  
-  var random = Math.floor(Math.random()*items.length);
-  console.log("Randomed number:" + random);
-  $('#result').html(items[random].name + "<br>Address: " + items[random].address + "<br>Located at: " +items[random].location );
-  
-  /*var fileRead = $.getJSON('/restaurantJSON',function(data){
-    console.log("load from json")
-    console.log(typeof(data));
-    var random = Math.floor(Math.random()*data.length);
-    $('#result').append(data[random].name + "<br>Address: " + data[random].address + "<br>Located at: " +data[random].location );
-  });*/
-
-}
 </script>
  </script>
 </body>

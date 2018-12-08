@@ -16,7 +16,9 @@ router.get("/",function(req,res){
 router.get("/add",function(req,res){
     res.sendFile(path+"addRestaurant.html");
 })
-
+router.get('/random',function(req,res){
+    res.sendFile(path+"randomRestaurant.html");
+})
 router.get("/restaurantJSON",function(req,res){
     var fs = require('fs');
     var obj = JSON.parse(fs.readFileSync('js/dummy.json','utf-8'));
