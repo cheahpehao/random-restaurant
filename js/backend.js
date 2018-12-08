@@ -1,6 +1,6 @@
 var http = require("http");
 var fs = require("fs");
-var parseObj = fs.readFile('dummy.json','utf-8',function(err,data){
+var parseObj = fs.readFile('dummy.json','utf-8',function(err,data){ //Read from Json file
     console.log(typeof(data));
     var newJSON = [];
     var newObj = {

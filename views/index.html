@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- Bootstrap css -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+ </head>
+<body>
+  <div>
+      <nav class="nav">
+      <a class="nav-link" href="/">Show restaurant</a>  
+      <a class="nav-link" href="/add">Add restaurant</a>
+      </nav>
+  </div>
+<div>
+    <h1 class="display-4" style="text-align: center; margin: auto"></h2>
+</div>
+
+<div>
+    <table class="table-dark table" >
+      <tbody id="restaurantTable">
+          <tr> 
+              <th>Name</th>
+              <th>Business-Hour</th>
+             <th>Address</th>
+            <th>Location</th>
+        
+              </tr>
+                 
+        
+      </tbody>
+      
+        
+    </table>
+</div>
+
+
+  <!-- Bootstrap Javascript -->
+  <script
+  src="https://code.jquery.com/jquery-3.3.1.js"
+  integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+  crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+ 
+ <!-- Table maker -->
+ <script type="text/javascript">
+ var items = [];
+ function getTableData(){
+    var fileRead = $.getJSON('/restaurantJSON',function(data){
+    console.log("load from json")
+    console.log(typeof(data));
+    console.log(data.name);
+    for (var i in data){
+      $('#restaurantTable').append("<tr>");
+      $('#restaurantTable').append("<td>"+data[i].name+"</td>");
+      $('#restaurantTable').append("<td>"+data[i].businessHour+"</td>");
+      $('#restaurantTable').append("<td>"+data[i].address+"</td>");
+      $('#restaurantTable').append("<td>"+data[i].location+"</td>");
+      $('#restaurantTable').append("</tr>");
+    }
+
+  });
+};
+  getTableData();
+
+  
+</script>
+ </script>
+</body>
+</html>
