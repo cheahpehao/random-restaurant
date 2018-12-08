@@ -14,22 +14,20 @@
 <div>
     <h1 class="display-4" style="text-align: center; margin: auto"></h2>
 </div>
-
+<div>
+  <input class="form-control" id="filter" type="text" placeholder="Filter restaurant via location">
+</div>
 <div>
     <table class="table-dark table" >
-      <tbody id="restaurantTable">
-          <tr>
-              <th>Name</th>
-              <th>Business-Hour</th>
-             <th>Address</th>
+        <thead>
+            <th>Name</th>
+            <th>Business-Hour</th>
+            <th>Address</th>
             <th>Location</th>
-        
-              </tr>
-                 
-        
+          </thead>
+      <tbody id="restaurantTable">
+          
       </tbody>
-      
-        
     </table>
 </div>
 
@@ -50,19 +48,20 @@
     console.log("load from json")
     console.log(typeof(data));
     for (var i in data){
-      $('#restaurantTable').append("<tr>");
-      $('#restaurantTable').append("<td>"+data[i].name+"</td>");
-      $('#restaurantTable').append("<td>"+data[i].businessHour+"</td>");
-      $('#restaurantTable').append("<td>"+data[i].address+"</td>");
-      $('#restaurantTable').append("<td>"+data[i].location+"</td>");
-      $('#restaurantTable').append("</tr>");
+      $('#restaurantTable').append("<tr>" + "<td>"+data[i].name+"</td>" + "<td>"+data[i].businessHour+"</td>" + "<td>"+data[i].address+"</td>" + "<td id=\'location\'>"+data[i].location+"</td>" + "</tr>");
     }
-
   });
 };
-  getTableData();
-
-  
+getTableData();
+//Location filter
+$(document).ready(function(){
+  $("#filter").on('keyup',function(){
+    var value = $(this).val().toLowerCase();
+    $('#restaurantTable tr').filter(function(){
+      $(this).toggle($(this).children($('#location')).text().toLowerCase().indexOf(value) > -1);
+    });
+  });
+})
 </script>
  </script>
 </body>
