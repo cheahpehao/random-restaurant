@@ -18,7 +18,7 @@
 <div>
     <table class="table-dark table" >
       <tbody id="restaurantTable">
-          <tr> 
+          <tr>
               <th>Name</th>
               <th>Business-Hour</th>
              <th>Address</th>
@@ -49,7 +49,6 @@
     var fileRead = $.getJSON('/restaurantJSON',function(data){
     console.log("load from json")
     console.log(typeof(data));
-    console.log(data.name);
     for (var i in data){
       $('#restaurantTable').append("<tr>");
       $('#restaurantTable').append("<td>"+data[i].name+"</td>");
