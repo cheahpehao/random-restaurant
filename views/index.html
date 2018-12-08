@@ -12,7 +12,9 @@
       </nav>
   </div>
 <div>
-    <h1 class="display-4" style="text-align: center; margin: auto"></h2>
+    <h1 class="display-4" style="text-align: center; margin: auto">
+    Show All Restaurant
+    </h1>
 </div>
 <div>
   <input class="form-control" id="filter" type="text" placeholder="Filter restaurant via location">
@@ -31,6 +33,14 @@
     </table>
 </div>
 
+<div>
+  <p>Today Let's Eat at: </p>
+  <p id="result"></p>
+  <br>
+</div>
+<div>
+    <button type="button" class="btn btn-primary" onclick=randomRestaurant()>Random a restaurant</button>
+</div>
 
   <!-- Bootstrap Javascript -->
   <script
@@ -47,6 +57,7 @@
     var fileRead = $.getJSON('/restaurantJSON',function(data){
     console.log("load from json")
     console.log(typeof(data));
+    items=data;
     for (var i in data){
       $('#restaurantTable').append("<tr>" + "<td>"+data[i].name+"</td>" + "<td>"+data[i].businessHour+"</td>" + "<td>"+data[i].address+"</td>" + "<td id=\'location\'>"+data[i].location+"</td>" + "</tr>");
     }
@@ -62,6 +73,20 @@ $(document).ready(function(){
     });
   });
 })
+function randomRestaurant(){
+  
+  var random = Math.floor(Math.random()*items.length);
+  console.log("Randomed number:" + random);
+  $('#result').html(items[random].name + "<br>Address: " + items[random].address + "<br>Located at: " +items[random].location );
+  
+  /*var fileRead = $.getJSON('/restaurantJSON',function(data){
+    console.log("load from json")
+    console.log(typeof(data));
+    var random = Math.floor(Math.random()*data.length);
+    $('#result').append(data[random].name + "<br>Address: " + data[random].address + "<br>Located at: " +data[random].location );
+  });*/
+
+}
 </script>
  </script>
 </body>
