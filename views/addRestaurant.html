@@ -20,21 +20,28 @@
         <h1 class="display-4" style="text-align: center; margin: auto">Add Restaurant </h1>
         <br>
     </div>
-    <form method="POST" style="margin:auto 25%" id="addRestaurant" action="/submit">
+    <form class="needs-validation" method="POST" style="margin:auto 25%" id="addRestaurant" action="/submit">
+        <!--Submit at index.js will handle the rest-->
         <div class="form-group">
-            <input name="name" class="form-control" placeholder="Restaurant Name" autocomplete="name">
 
+            <label for="name">Name of Restaurant</label>
+            <input name="name" class="form-control" placeholder="Restaurant Name" id="name" required>
         </div>
         <div class="form-group">
-            <input name="businessHour" class="form-control" placeholder="opening hours - closing hours. eg. 8am to 10pm"
-                autocomplete="work">
+
+            <label for="businessHour">Business Hour of Restaurant</label>
+            <input id="businessHour" name="businessHour" class="form-control" placeholder="opening hours - closing hours. eg. 8am to 10pm"
+                required>
         </div>
         <div class="form-group">
-            <input name="address" class="form-control" placeholder="Full address" autocomplete="address-level1">
+
+            <label for="address">Address of Restaurant</label>
+            <input id="address" name="address" class="form-control" placeholder="Full address" required>
         </div>
         <div class="form-group">
-            <input name="location" class="form-control" placeholder="Area of the restaunt. Eg. Bangsar, Kepong, Jinjang "
-                autocomplete="address-level4">
+            <label for="location">Location of Restaurant</label>
+            <input id="location" name="location" class="form-control" placeholder="Area of the restaunt. Eg. Bangsar, Kepong, Jinjang "
+                required>
         </div>
         <button type="submit" class="btn btn-primary mb-2" value="submit">Add Restaurant</button>
     </form>

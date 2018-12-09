@@ -18,11 +18,11 @@
     </div>
     <div>
 
-        <h1 class="display-4" style="text-align: center; margin: auto">Today Let's Eat at: </h1>
-        <p id="result" style="text-align:center; margin: auto"></p>
+        <h1 class="display-4" style="text-align: center; margin: auto 25%">Today Let's Eat at: </h1>
+        <p id="result" style="text-align:start; margin: auto 20%"></p>
         <br>
     </div>
-    <div class="form-group">
+    <div class="form-group" style="margin:auto 20%">
         <label for="sel1">Select location to filer:</label>
         <select class="form-control" id="filterOption">
             <option value="">Any</option>
@@ -45,30 +45,33 @@
     <script>
         $(document).ready(function () {
             $.getJSON('/restaurantJSON', function (data) {
+                var filterArray = [];
                 for (var i in data) {
-                    console.log("appending dropdown list");
-                    $('#filterOption').append("<option value='" + data[i].location + "'> " + data[i].location + "</option>");
+                    if ($.inArray(data[i].location, filterArray) > -1) { //check if the list already contain the same location
+                        console.log("already in array");
+                    } else {
+                        console.log("appending dropdown list");
+                        filterArray.push(data[i].location);
+                        $('#filterOption').append("<option value='" + data[i].location + "'> " + data[i].location + "</option>");
+                        console.log(filterArray);
+                    }
                 }
             });
         })
         function getRandomRestaurant() {
             var fileRead = $.getJSON('/restaurantJSON', function (data) {
-
                 console.log("load from json")
-                console.log(typeof (data));
-                var random = Math.floor(Math.random() * data.length);
+                var random = Math.floor(Math.random() * data.length); //Randomize depends on the length of the JSON
                 var value = $('#filterOption option:selected').val().toLowerCase()
-                console.log(value);
                 var comValue = data[random].location.toLowerCase();
-                console.log(comValue);
-                if (comValue.localeCompare(value.toLowerCase()) == 0) {
+                if (comValue.localeCompare(value.toLowerCase()) == 0) { //Check if the location is the filtered location
                     $('#result').html(data[random].name + "<br>Address: " + data[random].address + "<br>Located at: " + data[random].location);
                 }
-                else if (value == "") {
+                else if (value == "") { //If set to any, then no restriction
                     $('#result').html(data[random].name + "<br>Address: " + data[random].address + "<br>Located at: " + data[random].location);
 
                 }
-                else {
+                else { //Random until get a match
                     getRandomRestaurant();
                 }
             });
