@@ -3,7 +3,8 @@ var app = express();
 var router = express.Router();
 var path = __dirname + '/views/';
 var staticPath = require('path');
-
+var bodyParser = require('body-parser');
+var urlencodedParser = bodyParser.urlencoded({extended:false});
 router.use(function(req,res,next){
     console.log("/"+ req.method);
     next();
@@ -16,6 +17,12 @@ router.get("/",function(req,res){
 router.get("/add",function(req,res){
     res.sendFile(path+"addRestaurant.html");
 })
+router.post("/submit",urlencodedParser,function(req,res){
+    var obj = [];
+    res.sendFile(path+"addRestaurant.html");
+    console.log(typeof(req));
+    console.log(req.body);
+})
 router.get('/random',function(req,res){
     res.sendFile(path+"randomRestaurant.html");
 })
@@ -27,7 +34,8 @@ router.get("/restaurantJSON",function(req,res){
 })
 
 app.use("/",router);
-app.use(express.static(staticPath.join(__dirname,'public')));    
+app.use(bodyParser.json());
+app.use(express.static(staticPath.join(__dirname,'public')));   
 app.listen(8080,function(){
     console.log("Port 8080")
 })

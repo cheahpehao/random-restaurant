@@ -5,7 +5,7 @@ var parseObj = fs.readFile('dummy.json','utf-8',function(err,data){ //Read from 
     var newJSON = [];
     var newObj = {
         "name":"Restaurant CDE",
-        "business-hour":"9am-11pm",
+        "businessHour":"9am-11pm",
         "address":"10, Jalan Chan Sow Lin",
         "location":"Kepong"
     }
