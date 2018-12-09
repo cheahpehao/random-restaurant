@@ -19,22 +19,24 @@
         <p id="result" style="text-align:center; margin: auto"></p>
         <br>
     </div>
+    <div>
+        <input class="form-control" id="filter" type="text" placeholder="Filter random restaurant via location keywords">
+      </div>
+
+      <div class="form-group">
+        <label for="sel1">Select location to filer:</label>
+        <select class="form-control" id="filterOption">
+          <option value="">Any</option>
+        </select>
+      </div>
+
     <div class="text-center">
         <button style="margin: auto" type="button" class="btn btn-primary" onclick=getRandomRestaurant() >Random a restaurant</button>
 
     </div>
         
     <!-- Restaurant Randomizer -->
-    <script>
-    function getRandomRestaurant(){
-        var fileRead = $.getJSON('/restaurantJSON',function(data){
-        console.log("load from json")
-        console.log(typeof(data));
-        var random = Math.floor(Math.random()*data.length);
-        $('#result').html(data[random].name + "<br>Address: " + data[random].address + "<br>Located at: " +data[random].location );
-        });
-    }
-    </script>
+    
     <!-- Bootstrap Javascript -->
   <script
   src="https://code.jquery.com/jquery-3.3.1.js"
@@ -43,5 +45,33 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
  
+  <script>    
+        $(document).ready(function(){
+            $.getJSON('/restaurantJSON',function(data){
+                for (var i in data){
+                console.log("appending dropdown list");
+                $('#filterOption').append("<option value='" + data[i].location + " '> " +data[i].location+"</option>");
+            }});
+        }) 
+        function getRandomRestaurant(){
+            var fileRead = $.getJSON('/restaurantJSON',function(data){
+            
+            console.log("load from json")
+            console.log(typeof(data));
+            var random = Math.floor(Math.random()*data.length);
+            var value = $('#filter').val().toLowerCase()
+            console.log(value);
+            var comValue = data[random].location.toLowerCase();
+            console.log(comValue.localeCompare(value));
+            
+            if (comValue.localeCompare(value) > -1){
+                $('#result').html(data[random].name + "<br>Address: " + data[random].address + "<br>Located at: " +data[random].location );
+            }
+            else{
+                getRandomRestaurant();
+            }
+            });
+        }
+        </script>
 </body>
 </html>
