@@ -19,10 +19,6 @@
         <p id="result" style="text-align:center; margin: auto"></p>
         <br>
     </div>
-    <div>
-        <input class="form-control" id="filter" type="text" placeholder="Filter random restaurant via location keywords">
-      </div>
-
       <div class="form-group">
         <label for="sel1">Select location to filer:</label>
         <select class="form-control" id="filterOption">
@@ -50,7 +46,7 @@
             $.getJSON('/restaurantJSON',function(data){
                 for (var i in data){
                 console.log("appending dropdown list");
-                $('#filterOption').append("<option value='" + data[i].location + " '> " +data[i].location+"</option>");
+                $('#filterOption').append("<option value='" + data[i].location + "'> " +data[i].location+"</option>");
             }});
         }) 
         function getRandomRestaurant(){
@@ -59,13 +55,16 @@
             console.log("load from json")
             console.log(typeof(data));
             var random = Math.floor(Math.random()*data.length);
-            var value = $('#filter').val().toLowerCase()
+            var value = $('#filterOption option:selected').val().toLowerCase()
             console.log(value);
             var comValue = data[random].location.toLowerCase();
-            console.log(comValue.localeCompare(value));
-            
+            console.log(comValue);
             if (comValue.localeCompare(value.toLowerCase()) == 0){
                 $('#result').html(data[random].name + "<br>Address: " + data[random].address + "<br>Located at: " +data[random].location );
+            }
+            else if (value =="") {
+                $('#result').html(data[random].name + "<br>Address: " + data[random].address + "<br>Located at: " +data[random].location );
+ 
             }
             else{
                 getRandomRestaurant();
