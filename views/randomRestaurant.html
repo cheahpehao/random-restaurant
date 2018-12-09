@@ -1,76 +1,79 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-     <!-- Bootstrap css -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
- 
+    <!-- Bootstrap css -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
+
 </head>
+
 <body>
     <div>
-      <nav class="nav">
-      <a class="nav-link" href="/">Show restaurant</a>  
-      <a class="nav-link" href="/add">Add restaurant</a>
-      <a class="nav-link" href="/random">Random a restaurnt</a>
-      </nav>
+        <nav class="nav">
+            <a class="nav-link" href="/">Show restaurant</a>
+            <a class="nav-link" href="/add">Add restaurant</a>
+            <a class="nav-link" href="/random">Random a restaurnt</a>
+        </nav>
     </div>
     <div>
-    
+
         <h1 class="display-4" style="text-align: center; margin: auto">Today Let's Eat at: </h1>
         <p id="result" style="text-align:center; margin: auto"></p>
         <br>
     </div>
-      <div class="form-group">
+    <div class="form-group">
         <label for="sel1">Select location to filer:</label>
         <select class="form-control" id="filterOption">
-          <option value="">Any</option>
+            <option value="">Any</option>
         </select>
-      </div>
+    </div>
 
     <div class="text-center">
-        <button style="margin: auto" type="button" class="btn btn-primary" onclick=getRandomRestaurant() >Random a restaurant</button>
+        <button style="margin: auto" type="button" class="btn btn-primary" onclick=getRandomRestaurant()>Random a
+            restaurant</button>
 
     </div>
-        
-    <!-- Restaurant Randomizer -->
-    
     <!-- Bootstrap Javascript -->
-  <script
-  src="https://code.jquery.com/jquery-3.3.1.js"
-  integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
-  crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
- 
-  <script>    
-        $(document).ready(function(){
-            $.getJSON('/restaurantJSON',function(data){
-                for (var i in data){
-                console.log("appending dropdown list");
-                $('#filterOption').append("<option value='" + data[i].location + "'> " +data[i].location+"</option>");
-            }});
-        }) 
-        function getRandomRestaurant(){
-            var fileRead = $.getJSON('/restaurantJSON',function(data){
-            
-            console.log("load from json")
-            console.log(typeof(data));
-            var random = Math.floor(Math.random()*data.length);
-            var value = $('#filterOption option:selected').val().toLowerCase()
-            console.log(value);
-            var comValue = data[random].location.toLowerCase();
-            console.log(comValue);
-            if (comValue.localeCompare(value.toLowerCase()) == 0){
-                $('#result').html(data[random].name + "<br>Address: " + data[random].address + "<br>Located at: " +data[random].location );
-            }
-            else if (value =="") {
-                $('#result').html(data[random].name + "<br>Address: " + data[random].address + "<br>Located at: " +data[random].location );
- 
-            }
-            else{
-                getRandomRestaurant();
-            }
+    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+    <!-- Restaurant Randomizer -->
+    <script>
+        $(document).ready(function () {
+            $.getJSON('/restaurantJSON', function (data) {
+                for (var i in data) {
+                    console.log("appending dropdown list");
+                    $('#filterOption').append("<option value='" + data[i].location + "'> " + data[i].location + "</option>");
+                }
+            });
+        })
+        function getRandomRestaurant() {
+            var fileRead = $.getJSON('/restaurantJSON', function (data) {
+
+                console.log("load from json")
+                console.log(typeof (data));
+                var random = Math.floor(Math.random() * data.length);
+                var value = $('#filterOption option:selected').val().toLowerCase()
+                console.log(value);
+                var comValue = data[random].location.toLowerCase();
+                console.log(comValue);
+                if (comValue.localeCompare(value.toLowerCase()) == 0) {
+                    $('#result').html(data[random].name + "<br>Address: " + data[random].address + "<br>Located at: " + data[random].location);
+                }
+                else if (value == "") {
+                    $('#result').html(data[random].name + "<br>Address: " + data[random].address + "<br>Located at: " + data[random].location);
+
+                }
+                else {
+                    getRandomRestaurant();
+                }
             });
         }
-        </script>
+    </script>
 </body>
+
 </html>

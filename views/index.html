@@ -1,71 +1,75 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <!-- Bootstrap css -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
- </head>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+    crossorigin="anonymous">
+</head>
+
 <body>
   <div>
-      <nav class="nav">
-      <a class="nav-link" href="/">Show restaurant</a>  
+    <nav class="nav">
+      <a class="nav-link" href="/">Show restaurant</a>
       <a class="nav-link" href="/add">Add restaurant</a>
       <a class="nav-link" href="/random">Random a restaurnt</a>
-      </nav>
+    </nav>
   </div>
-<div>
+  <div>
     <h1 class="display-4" style="text-align: center; margin: auto">
-    Show All Restaurant
+      Show All Restaurant
     </h1>
-</div>
-<div>
-  <input class="form-control" id="filter" type="text" placeholder="Filter restaurant via location">
-</div>
-<div>
-    <table class="table-dark table" >
-        <thead>
-            <th>Name</th>
-            <th>Business-Hour</th>
-            <th>Address</th>
-            <th>Location</th>
-          </thead>
+  </div>
+  <div>
+    <input class="form-control" id="filter" type="text" placeholder="Filter restaurant via location">
+  </div>
+  <div>
+    <table class="table-dark table">
+      <thead>
+        <th>Name</th>
+        <th>Business-Hour</th>
+        <th>Address</th>
+        <th>Location</th>
+      </thead>
       <tbody id="restaurantTable">
-          
+
       </tbody>
     </table>
-</div>
+  </div>
 
   <!-- Bootstrap Javascript -->
-  <script
-  src="https://code.jquery.com/jquery-3.3.1.js"
-  integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
-  crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
- 
- <!-- Table maker -->
- <script type="text/javascript">
- var items = [];
- function getTableData(){
-    var fileRead = $.getJSON('/restaurantJSON',function(data){
-    console.log("load from json")
-    console.log(typeof(data));
-    items=data;
-    for (var i in data){
-      $('#restaurantTable').append("<tr>" + "<td>"+data[i].name+"</td>" + "<td>"+data[i].businessHour+"</td>" + "<td>"+data[i].address+"</td>" + "<td id=\'location\'>"+data[i].location+"</td>" + "</tr>");
-    }
-  });
-};
-getTableData();
-//Location filter
-$(document).ready(function(){
-  $("#filter").on('keyup',function(){
-    var value = $(this).val().toLowerCase();
-    $('#restaurantTable tr').filter(function(){
-      $(this).toggle($(this).children($('#location')).text().toLowerCase().indexOf(value) > -1);
-    });
-  });
-})
-</script>
- </script>
+  <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+    crossorigin="anonymous"></script>
+
+  <!-- Table maker -->
+  <script type="text/javascript">
+    var items = [];
+    function getTableData() {
+      var fileRead = $.getJSON('/restaurantJSON', function (data) {
+        console.log("load from json")
+        console.log(typeof (data));
+        items = data;
+        for (var i in data) {
+          $('#restaurantTable').append("<tr>" + "<td>" + data[i].name + "</td>" + "<td>" + data[i].businessHour + "</td>" + "<td>" + data[i].address + "</td>" + "<td id=\'location\'>" + data[i].location + "</td>" + "</tr>");
+        }
+      });
+    };
+    getTableData();
+    //Location filter
+    $(document).ready(function () {
+      $("#filter").on('keyup', function () {
+        var value = $(this).val().toLowerCase();
+        $('#restaurantTable tr').filter(function () {
+          $(this).toggle($(this).children($('#location')).text().toLowerCase().indexOf(value) > -1);
+        });
+      });
+    })
+  </script>
+  </script>
 </body>
+
 </html>
