@@ -15,7 +15,6 @@
       </div>
     <div>
         <h1 class="display-4" style="text-align: center; margin: auto">Add Restaurant </h1>
-        <p id="result" style="text-align:center; margin: auto"></p>
         <br>
     </div>
     <form method="POST" style="margin:auto 25%" id="addRestaurant" action="/submit">
@@ -46,9 +45,10 @@ crossorigin="anonymous"></script>
 <!-- Add restaurant script -->
 <script>
     var obj = [] 
-    
+    /*
     $('#addRestaurant').on('submit',function(e){
         e.preventDefault();
+        
         var data = $('#addRestaurant').serialize().split('&');
         console.log(data);
         for (key = 0; key < data.length;key++){
@@ -66,8 +66,7 @@ crossorigin="anonymous"></script>
                 console.log(JSON.stringify(data));
             }
         })
-
-    })
+    })*/
     
 </script>
 </body>

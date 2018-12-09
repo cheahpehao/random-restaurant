@@ -1,8 +1,1 @@
-[{"name":"Restaurant ABC",
-  "businessHour":"8am-10pm",
-  "address":"10, Jalan Loke Yew",
-  "location":"Sentul"},
-  {"name":"Restaurant CDE",
-    "businessHour":"9am-11pm",
-    "address":"10, Jalan Chan Sow Lin",
-    "location":"Kepong"}]
+[{"name":"Restaurant ABC","businessHour":"8am-10pm","address":"10, Jalan Loke Yew","location":"Sentul"},{"name":"Restaurant CDE","businessHour":"9am-11pm","address":"10, Jalan Chan Sow Lin","location":"Kepong"},{"name":"Restaurant EFG","businessHour":"8am-11pm","address":"10, Jalan Loke Yew","location":"Kepong"},{"name":"Restaurant TIG","businessHour":"24-hours","address":"10, Jalan Cheras","location":"Cheras"}]

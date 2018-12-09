@@ -17,11 +17,24 @@ router.get("/",function(req,res){
 router.get("/add",function(req,res){
     res.sendFile(path+"addRestaurant.html");
 })
+
+//Get restaurant information from form
 router.post("/submit",urlencodedParser,function(req,res){
-    var obj = [];
-    res.sendFile(path+"addRestaurant.html");
-    console.log(typeof(req));
+    console.log(typeof(req.body));
     console.log(req.body);
+    res.sendFile(path+"success.html");
+    var fs = require('fs');
+    var obj = fs.readFile('js/dummy.json',function(err,data){
+        var newJSON = JSON.parse(data);
+        newJSON.push(req.body)
+        
+        fs.writeFile('js/dummy.json',JSON.stringify(newJSON),function(err,data){
+            if (err) throw err;
+            console.log('successfully write json');
+        })
+    })
+    
+    
 })
 router.get('/random',function(req,res){
     res.sendFile(path+"randomRestaurant.html");
