@@ -64,7 +64,7 @@
             var comValue = data[random].location.toLowerCase();
             console.log(comValue.localeCompare(value));
             
-            if (comValue.localeCompare(value) > -1){
+            if (comValue.localeCompare(value.toLowerCase()) == 0){
                 $('#result').html(data[random].name + "<br>Address: " + data[random].address + "<br>Located at: " +data[random].location );
             }
             else{
